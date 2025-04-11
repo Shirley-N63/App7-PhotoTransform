@@ -104,15 +104,16 @@
 
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE */
           var imageData = context.getImageData(0, 0, canvas.width, canvas.height); //adding this allows the image to cover the canvas area using "canvas.width, canvas.height"
-          var data = imageData.data; //adding this gives full control of pixels to be able to adjust with the following code below 
+          var data = imageData.data; //adding this gives full control of pixels to be able to adjust with the following code below:
 
-          for (var i = 0; i < data.length; i += 4) { //identifies modified pixels within RGB
-               data[i] = 0; //removes red channel intensity from pixels 
-               data[i + 1] = 0; //removes green channel intensity from pixels 
+          for (var i = 0; i < data.length; i += 4) { //identifies modified pixels within RGBA
+          //("i += 4" prevents accidentally messing with the wrong channel by keeping it within pixel boundaries in the array, skipped by 4)
+               data[i] = 0; //removes red channel intensity from pixels (set equal to 0)
+               data[i + 1] = 0; //removes green channel intensity from pixels (set equal to 0)
               //NOTE: "data[i + 2]" does NOT change to preserve blue intensity preference 
  
         }
-        context2.putImageData(imageData, 0, 0); //this tells the app to add the "blue image" onto the second canvas 
+        context2.putImageData(imageData, 0, 0); //this tells the app to add the "blue image" onto the SECOND canvas with "context.2"
         } // end of img.onload
         
         img.src = reader.result;
@@ -137,9 +138,9 @@
     <div data-role="header">
     <h1>Primary Colors</h1></div> <!-- /header -->
     <div data-role="content">	
-      <h2>Push button to take picture.</h2> <!--label of text on page, tells user what to do-->
+      <h2>Push button to take picture.</h2> <!--MAIN label of text on page, tells user what to do-->
       <div>
-        Press orange button to create or choose image file:
+        Press orange button to create or choose image file: <!--SUBHEADING on page -->
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
       </div>
       <div id="messageDisplayArea"></div>
