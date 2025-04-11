@@ -103,9 +103,16 @@
           /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE */
-          
-          
-          
+          var imageData = context.getImageData(0, 0, canvas.width, canvas.height); //adding this allows the image to cover the canvas area using "canvas.width, canvas.height"
+          var data = imageData.data; //adding this gives full control of pixels to be able to adjust with the following code below 
+
+          for (var i = 0; i < data.length; i += 4) { //identifies modified pixels within RGB
+               data[i] = 0; //removes red channel intensity from pixels 
+               data[i + 1] = 0; //removes green channel intensity from pixels 
+              //NOTE: "data[i + 2]" does NOT change to preserve blue intensity preference 
+ 
+        }
+        context2.putImageData(imageData, 0, 0); //this tells the app to add the "blue image" onto the second canvas 
         } // end of img.onload
         
         img.src = reader.result;
